@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             <% @order.line_items.each do |x| %>
-            <%= render 'order', product_image: x.product.image, product_name: x.product.name, details: x.product.description, quantity: x.quantity, line_item: x.product.quantity %>
+            <%= render 'order', product_image: x.product.image.tiny, product_name: x.product.name, details: x.product.description, quantity: x.quantity, line_item: x.product.quantity %>
               <% end %>
         </tbody>
 

@@ -26,6 +26,38 @@
       </div>
     </div>
 
+    <hr>
+    <h3>Review this product</h3>
+      <%= form_for [@product, @review] do |f| %>
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </p>
+    <p>
+      <%= f.label :rating %>
+      <%= f.number_field :rating, in: 1.0..10.0%>
+    </p>
+    <p>
+      <%= f.submit "Submit Review" %>
+    </p>
+  <% end %>
+    <hr>
+
+
+    <% @product.reviews.order('id DESC').each do |review| %>
+    <hr>
+    <div class="row">
+    <span class="bg-danger">Reviewed by: <%= review.user.first_name %><%= review.user.last_name %></span><br>
+    <span class="bg-danger">Rating: <%= review.rating %></span><br >
+    <span class="bg-danger">Description: <%= review.description %></span>
+    <aside><%= link_to fa_icon('trash'), [@product, review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></aside>
+
+    <hr>
+    </div>
+
+
+    <% end %>
+
   </article>
 
 </section>

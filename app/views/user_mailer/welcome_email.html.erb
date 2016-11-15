@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to jungle.com, <%= @order.email %></h1>
+    <p>
+      You have successfully ordered from jungle.com
+      Your order includes:
+    </p>
+
+    <% @order.line_items.each do |x| %>
+     <li><%= x.product.name %></li>
+     <% end %>
+
+    <p>
+      Your order total amounts to : $<%= @total %>
+    </p>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>

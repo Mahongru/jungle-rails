@@ -1,0 +1,12 @@
+Welcome to jungle.com, <%= @order.email %>
+===============================================
+
+Hello, <%= @order.email %>
+You have successfully placed an order from jungle.com,
+Your order includes:
+<% @order.line_items.each do |x| %>
+<%= x.quantity %> x <%= x.product.name %>
+<% end %>
+Your order total amounts to : $<%= @total %>
+
+Thanks and have a great day!
