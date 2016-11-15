@@ -5,6 +5,10 @@
   </header>
 
   <div class="panel panel-default items">
+    <% if cart.length == 0 %>
+    <h2>&nbsp;Your cart is empty</h2>
+    <a href="/">&nbsp;&nbsp;&nbsp;Continue Shopping</a>
+    <% else %>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -15,11 +19,12 @@
         </tr>
       </thead>
       <tbody>
-        <% @cart_total = 0 %>
+       <% @cart_total = 0 %>
         <% cart.each do |product_id, details| %>
           <%= render 'item', product_id: product_id, details: details %>
         <% end %>
       </tbody>
+
       <tfoot>
         <tr>
           <th colspan="4">
@@ -49,5 +54,6 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
 </section>
