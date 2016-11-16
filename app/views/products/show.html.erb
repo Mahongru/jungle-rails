@@ -31,11 +31,15 @@
       <%= form_for [@product, @review] do |f| %>
     <p>
       <%= f.label :description %>
-      <%= f.text_area :description %>
+      <%= f.text_area :description, class: 'form-control'%>
     </p>
     <p>
       <%= f.label :rating %>
-      <%= f.number_field :rating, in: 1.0..10.0%>
+        <%= f.select :rating do %>
+          <% (1..5).each do |number| -%>
+            <%= content_tag(:option, number, value: number) %>
+          <% end %>
+        <% end %>
     </p>
     <p>
       <%= f.submit "Submit Review" %>
@@ -47,9 +51,18 @@
     <% @product.reviews.order('id DESC').each do |review| %>
     <hr>
     <div class="row">
-    <span class="bg-danger">Reviewed by: <%= review.user.first_name %><%= review.user.last_name %></span><br>
-    <span class="bg-danger">Rating: <%= review.rating %></span><br >
-    <span class="bg-danger">Description: <%= review.description %></span>
+    <span>
+      <p>
+      <% (1..review.rating).each do %>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <% end %>
+
+      <% (0..4-review.rating).each do %>
+        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+      <% end %>
+    </span><br >
+    <span>Description: <%= review.description %></span><br>
+    <span>Reviewed by: <%= review.user.first_name %><%= review.user.last_name %></span>
     <aside><%= link_to fa_icon('trash'), [@product, review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></aside>
 
     <hr>

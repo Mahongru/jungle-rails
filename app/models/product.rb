@@ -6,6 +6,13 @@ class Product < ActiveRecord::Base
   belongs_to :category
     has_many :reviews
 
+    def average
+      if
+        self.reviews.count > 0
+        self.reviews.sum('rating') / self.reviews.count
+      end
+    end
+
   validates :name, presence: true
   validates :price, presence: true
   validates :quantity, presence: true

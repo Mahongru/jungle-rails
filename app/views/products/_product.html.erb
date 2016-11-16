@@ -8,6 +8,21 @@
   <p class="description">
     <%= product.description %>
   </p>
+  <p class="average">
+    <%avg = product.average %>
+
+    <% if !avg.nil? %>
+      Overall rating:
+      <% (1..avg).each do %>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <% end %>
+
+      <% (0..4-avg).each do %>
+      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+      <% end %>
+    <% end %>
+
+  </p>
   <footer class="actions">
     <%= link_to add_item_cart_path(product_id: product.id), class: 'btn btn-primary', method: :put do %>
       <%= fa_icon "shopping-cart", text: 'Add' %>
